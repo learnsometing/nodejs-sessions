@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
-  "private": true,
+  "name": "nodejs-user-sessions",
+  "private": false,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "A NestJS application demonstrating session authentication via passport.js",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
