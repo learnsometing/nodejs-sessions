@@ -15,7 +15,10 @@ const ENV = process.env.NODE_ENV;
     ConfigModule.forRoot({
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
     }),
-    MongooseModule.forRoot(process.env.DB_URL, { useNewUrlParser: true }),
+    MongooseModule.forRoot(process.env.DB_URL, {
+      useFindAndModify: false,
+      useNewUrlParser: true,
+    }),
     UsersModule,
   ],
   controllers: [AppController],

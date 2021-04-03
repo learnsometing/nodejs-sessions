@@ -6,7 +6,8 @@ import { Model } from 'mongoose';
 
 // User
 import CreateUserDTO from './dto/create-user.dto';
-import { UserDocument } from './schemas/user.schema';
+import UpdateUserDTO from './dto/update-user.dto';
+import { User, UserDocument } from './schemas/user.schema';
 
 @Injectable()
 export default class UsersService {
@@ -18,9 +19,9 @@ export default class UsersService {
    * Create a new user
    *
    * @param {CreateUserDTO} createUserDTO - object that implements the CreateUserDTO interface
-   * @returns {Promise<UserDocument | ValidationError>} - new user or error triggered by schema level validation
+   * @returns {Promise<User | ValidationError>} - new user or error triggered by schema level validation
    */
-  create(createUserDTO: CreateUserDTO): Promise<UserDocument> {
+  create(createUserDTO: CreateUserDTO): Promise<User> {
     return this.userModel.create(createUserDTO);
   }
 
@@ -28,18 +29,18 @@ export default class UsersService {
    * Retrieve a User by id
    *
    * @param {string} id - _id of user to find
-   * @returns {Promise<UserDocument | null>} - a user if found, or null if no such user exists
+   * @returns {Promise<User | null>} - a user if found, or null if no such user exists
    */
-  async findById(id: string): Promise<UserDocument | null> {
+  async findById(id: string): Promise<User | null> {
     return this.userModel.findById(id);
   }
 
   /**
    * Retrieve all Users
    *
-   * @returns {Promise<UserDocument[] | []>} - a list of all the users or an empty array
+   * @returns {Promise<User[] | []>} - a list of all the users or an empty array
    */
-  async index(): Promise<UserDocument[] | []> {
+  async index(): Promise<User[] | []> {
     return this.userModel.find();
   }
 
@@ -47,13 +48,13 @@ export default class UsersService {
    * Update a User By Id
    *
    * @param {string} id - _id of user to update
-   * @param {CreateUserDTO} updateUserDTO - object that implements CreateUserDTO interface
-   * @returns {Promise<UserDocument | null>} - the new version of the user after update or null if user not found
+   * @param {UpdateUserDTO} updateUserDTO - object that implements UpdateUserDTO interface
+   * @returns {Promise<User | null>} - the new version of the user after update or null if user not found
    */
   async updateById(
     id: string,
-    updateUserDTO: CreateUserDTO,
-  ): Promise<UserDocument | null> {
+    updateUserDTO: UpdateUserDTO,
+  ): Promise<User | null> {
     return this.userModel.findByIdAndUpdate(id, updateUserDTO, { new: true });
   }
 
@@ -61,9 +62,9 @@ export default class UsersService {
    * Delete a User by Id
    *
    * @param {string} id - _id of user to delete
-   * @returns {Promise<UserDocument | null>} - deleted user document or null if user not found
+   * @returns {Promise<User | null>} - deleted user document or null if user not found
    */
-  async deleteById(id: string): Promise<UserDocument | null> {
+  async deleteById(id: string): Promise<User | null> {
     return this.userModel.findByIdAndDelete(id);
   }
 }
