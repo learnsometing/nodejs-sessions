@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-user-sessions",
+  "name": "nodejs-sessions",
   "private": false,
   "version": "1.0.0",
   "description": "A NestJS application demonstrating session authentication via passport.js",
