@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 // Mongoose
 import { InjectModel } from '@nestjs/mongoose';
@@ -32,7 +32,13 @@ export default class UsersService {
    * @returns {Promise<User | null>} - a user if found, or null if no such user exists
    */
   async findById(id: string): Promise<User | null> {
-    return this.userModel.findById(id);
+    const user = await this.userModel.findById(id);
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    return user;
   }
 
   /**
@@ -55,7 +61,15 @@ export default class UsersService {
     id: string,
     updateUserDTO: UpdateUserDTO,
   ): Promise<User | null> {
-    return this.userModel.findByIdAndUpdate(id, updateUserDTO, { new: true });
+    const user = await this.userModel.findByIdAndUpdate(id, updateUserDTO, {
+      new: true,
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    return user;
   }
 
   /**
@@ -65,6 +79,12 @@ export default class UsersService {
    * @returns {Promise<User | null>} - deleted user document or null if user not found
    */
   async deleteById(id: string): Promise<User | null> {
-    return this.userModel.findByIdAndDelete(id);
+    const user = await this.userModel.findByIdAndDelete(id);
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    return user;
   }
 }
