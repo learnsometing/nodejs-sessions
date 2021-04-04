@@ -7,6 +7,9 @@ import { ConfigService } from '@nestjs/config';
 // Express
 import { NestExpressApplication } from '@nestjs/platform-express';
 
+// Helmet
+import * as helmet from 'helmet';
+
 // Passport
 import * as passport from 'passport';
 
@@ -36,6 +39,8 @@ async function bootstrap() {
     sess.cookie.secure = true; // serve secure cookies
   }
 
+  app.use(helmet());
+  app.enableCors({ credentials: true });
   app.use(session(sess));
   app.use(passport.initialize());
   app.use(passport.session());
