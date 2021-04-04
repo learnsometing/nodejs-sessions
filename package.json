@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-user-sessions",
+  "name": "nodejs-sessions",
   "private": false,
   "version": "1.0.0",
   "description": "A NestJS application demonstrating session authentication via passport.js",
@@ -25,15 +25,19 @@
     "@nestjs/core": "^7.6.15",
     "@nestjs/mongoose": "^7.2.4",
     "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/swagger": "^4.8.0",
+    "bcrypt": "^5.0.1",
     "mongoose": "^5.12.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.3.1",
     "@nestjs/testing": "^7.6.15",
+    "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.36",
