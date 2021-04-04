@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // Mongoose
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 const ENV = process.env.NODE_ENV;
 @Module({
@@ -20,6 +21,7 @@ const ENV = process.env.NODE_ENV;
       useNewUrlParser: true,
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

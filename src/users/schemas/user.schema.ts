@@ -21,7 +21,7 @@ export class User {
   lastName: string;
 
   @ApiProperty({ description: "User's password", example: 'password' })
-  @Prop()
+  @Prop({ required: true })
   password: string;
 }
 
