@@ -92,17 +92,21 @@ describe('UsersService', () => {
         lastName: 'Monaccio',
         password: 'foo',
       };
-
-      const user = Promise.resolve({
+      const userData = {
         email: 'brianmonaccio@protonmail.com',
         firstName: 'Brian',
         lastName: 'Monaccio',
         password: 'foo',
+      };
+
+      const user = Promise.resolve({
+        ...userData,
+        save: jest.fn(() => userData),
       });
 
-      userMock.findByIdAndUpdate.mockReturnValue(user);
+      userMock.findById.mockReturnValue(user);
       expect(service.updateById('123', update)).toEqual(user);
-      expect(userMock.findByIdAndUpdate).toHaveBeenCalled();
+      expect(userMock.findById).toHaveBeenCalled();
     });
   });
 

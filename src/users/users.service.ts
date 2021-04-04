@@ -61,14 +61,19 @@ export default class UsersService {
     id: string,
     updateUserDTO: UpdateUserDTO,
   ): Promise<User | null> {
-    const user = await this.userModel.findByIdAndUpdate(id, updateUserDTO, {
-      new: true,
-    });
+    let user = await this.userModel.findById(id);
 
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
 
+    // Update using save to take advantage of validation and pre/post middlewares
+    const { email, firstName, lastName, password } = updateUserDTO;
+    if (email) user.email = email;
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
+    if (password) user.password = password;
+    user = await user.save();
     return user;
   }
 
