@@ -13,6 +13,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 
+// Sessions
+import { SessionSerializer } from './session.serializer';
+
 // Users
 import { UsersModule } from '../users/users.module';
 import UsersService from '../users/users.service';
@@ -43,9 +46,9 @@ import { User, UserDocument, UserSchema } from '../users/schemas/user.schema';
       },
     ]),
     UsersModule,
-    PassportModule,
+    PassportModule.register({ session: true }),
   ],
-  providers: [AuthService, LocalStrategy, UsersService],
+  providers: [AuthService, LocalStrategy, SessionSerializer, UsersService],
   controllers: [AuthController],
 })
 export class AuthModule {}

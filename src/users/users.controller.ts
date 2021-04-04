@@ -6,11 +6,15 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 
 // DTO
 import CreateUserDTO from './dto/create-user.dto';
 import UpdateUserDTO from './dto/update-user.dto';
+
+// Auth Guards
+import { AuthenticatedGuard } from '../common/guards/authenticated.guard';
 
 // Services
 import UsersService from './users.service';
@@ -60,6 +64,7 @@ export class UsersController {
     return user;
   }
 
+  @UseGuards(AuthenticatedGuard)
   @ApiOkResponse({
     description: 'Array of all the saved users.',
     type: [User],

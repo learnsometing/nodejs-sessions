@@ -1,4 +1,4 @@
-import { Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 
 // Interfaces
 import UserQuery from '../users/dto/user-query.dto';
@@ -18,14 +18,24 @@ import {
 export class AuthController {
   @UseGuards(LocalAuthGuard)
   @ApiOkResponse({
-    description: "User's account details",
-    type: UserQuery,
+    description: 'Success message',
+    type: String,
   })
   @ApiInternalServerErrorResponse({
     description: 'Internal server error',
   })
   @Post('/login')
-  async login(@Request() req) {
-    return req.user;
+  async login() {
+    return { message: 'Login successful' };
+  }
+
+  @ApiOkResponse({
+    description: 'Success message',
+    type: String,
+  })
+  @Get('/logout')
+  logout(@Request() req) {
+    req.logout();
+    return { message: 'Logged out successfully' };
   }
 }

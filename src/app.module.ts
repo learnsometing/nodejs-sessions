@@ -27,8 +27,5 @@ const ENV = process.env.NODE_ENV;
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private configService: ConfigService) {
-    const db = this.configService.get<string>('DB_URL');
-    console.log('Connected to: ', db);
-  }
+  constructor(private configService: ConfigService) {}
 }
