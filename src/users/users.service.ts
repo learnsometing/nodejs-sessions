@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+// Interfaces
+import UserQuery from './interfaces/user-query';
+
 // Mongoose
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -36,6 +39,22 @@ export default class UsersService {
 
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    return user;
+  }
+
+  /**
+   * Retrieve a User that matches the query parameters.
+   *
+   * @param {UserQuery} query - object that implements the UserQuery interface
+   * @returns {User} - user matching query
+   */
+  async findOne(query): Promise<User | null> {
+    const user = await this.userModel.findOne(query);
+
+    if (!user) {
+      throw new NotFoundException('User matching query not found.');
     }
 
     return user;
