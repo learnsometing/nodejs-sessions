@@ -1,8 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-// Interfaces
-import UserQuery from './interfaces/user-query';
-
 // Mongoose
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -50,7 +47,7 @@ export default class UsersService {
    * @param {UserQuery} query - object that implements the UserQuery interface
    * @returns {User} - user matching query
    */
-  async findOne(query): Promise<User | null> {
+  async findOne(query): Promise<UserDocument | null> {
     const user = await this.userModel.findOne(query);
 
     if (!user) {

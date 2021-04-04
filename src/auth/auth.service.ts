@@ -22,7 +22,7 @@ export class AuthService {
     const passwordsMatch = await bcrypt.compare(password, user.password);
     if (user && passwordsMatch) {
       // Return all user details except for password
-      const { password, ...result } = user;
+      const { password, ...result } = user.toObject();
       return result;
     }
 
