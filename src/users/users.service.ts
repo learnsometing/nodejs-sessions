@@ -42,6 +42,22 @@ export default class UsersService {
   }
 
   /**
+   * Retrieve a User that matches the query parameters.
+   *
+   * @param {UserQuery} query - object that implements the UserQuery interface
+   * @returns {User} - user matching query
+   */
+  async findOne(query): Promise<UserDocument | null> {
+    const user = await this.userModel.findOne(query);
+
+    if (!user) {
+      throw new NotFoundException('User matching query not found.');
+    }
+
+    return user;
+  }
+
+  /**
    * Retrieve all Users
    *
    * @returns {Promise<User[] | []>} - a list of all the users or an empty array

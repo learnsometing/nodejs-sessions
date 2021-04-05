@@ -62,6 +62,25 @@ describe('UsersService', () => {
     });
   });
 
+  describe('findOne', () => {
+    it('should find a user matching the query', () => {
+      const user = Promise.resolve({
+        email: 'brianmonaccio@protonmail.com',
+        firstName: 'Brian',
+        lastName: 'Monaccio',
+        password: 'foo',
+      });
+
+      userMock.findOne.mockReturnValue(user);
+      expect(
+        service.findOne({ email: 'brianmonaccio@protonmail.com' }),
+      ).toEqual(user);
+      expect(userMock.findOne).toHaveBeenCalledWith({
+        email: 'brianmonaccio@protonmail.com',
+      });
+    });
+  });
+
   describe('index', () => {
     it('should find all users', () => {
       const users = Promise.resolve([

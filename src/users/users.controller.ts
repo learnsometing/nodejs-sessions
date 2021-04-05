@@ -6,11 +6,15 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 
 // DTO
 import CreateUserDTO from './dto/create-user.dto';
 import UpdateUserDTO from './dto/update-user.dto';
+
+// Auth Guards
+import { AuthenticatedGuard } from '../common/guards/authenticated.guard';
 
 // Services
 import UsersService from './users.service';
@@ -60,6 +64,7 @@ export class UsersController {
     return user;
   }
 
+  @UseGuards(AuthenticatedGuard)
   @ApiOkResponse({
     description: 'Array of all the saved users.',
     type: [User],
@@ -73,6 +78,7 @@ export class UsersController {
     return users;
   }
 
+  @UseGuards(AuthenticatedGuard)
   @ApiOkResponse({
     description: 'Updated version of existing user.',
     type: User,
@@ -92,6 +98,7 @@ export class UsersController {
     return updatedUser;
   }
 
+  @UseGuards(AuthenticatedGuard)
   @ApiOkResponse({
     description: 'User that was removed from the database.',
     type: User,
