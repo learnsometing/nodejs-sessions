@@ -1,8 +1,5 @@
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 
-// Interfaces
-import UserQuery from '../users/dto/user-query.dto';
-
 // Passport Auth Guards
 import LocalAuthGuard from './local-auth.guard';
 
