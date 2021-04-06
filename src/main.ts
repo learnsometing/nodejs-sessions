@@ -40,7 +40,9 @@ async function bootstrap() {
   }
 
   app.use(helmet());
-  app.enableCors({ credentials: true });
+
+  // let origin = configService.get<string>('NODE_ENV') === 'development' ? 'http://localhost:8000' : TODO: Production domain
+  app.enableCors({ credentials: true, origin: 'http://localhost:8000' });
   app.use(session(sess));
   app.use(passport.initialize());
   app.use(passport.session());
